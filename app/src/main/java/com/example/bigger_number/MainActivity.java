@@ -90,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
             //wrong pick
             resultDisplay.setText("Wrong Pick :(");
             randomGen(v);
-
         }
 
     }
