@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -74,19 +75,29 @@ public class MainActivity extends AppCompatActivity {
         TextView livesDisplay = this.findViewById(R.id.livesDisplay);
         livesDisplay.setText("Lives Left: " + lives);
         scoreDisplay.setText("Your Score: " + userScore);
-        Random r = new Random();
-         num1 = r.nextInt(100);
-         num2 = r.nextInt(100);
-         //Button Object
-        Button buttonOne = this.findViewById(R.id.button1);
-        Button buttonTwo = this.findViewById(R.id.button2);
-        String numOne = String.valueOf(num1);
-        String numTwo = String.valueOf(num2);
-        //Set button Text
-        buttonOne.setText(numOne);
-        buttonTwo.setText(numTwo);
+        if(lives > 0){
+            Random r = new Random();
+            num1 = r.nextInt(100);
+            num2 = r.nextInt(100);
+            //Button Object
+            Button buttonOne = this.findViewById(R.id.button1);
+            Button buttonTwo = this.findViewById(R.id.button2);
+            String numOne = String.valueOf(num1);
+            String numTwo = String.valueOf(num2);
+            //Set button Text
+            buttonOne.setText(numOne);
+            buttonTwo.setText(numTwo);
+        }
+        else {
+            //Displays toast message and resets users score and lives and starts the game again
+            Toast toast = Toast.makeText(getApplicationContext(), "Game Over", Toast.LENGTH_SHORT);
+            toast.show();
+            userScore = 0;
+            lives = 3;
+            randomGen(v);
+        }
     }
-
+//Button One click action
     public void button1Click(View v){
         final TextView resultDisplay = this.findViewById(R.id.resultView);
         if(num1 > num2 || num1 == num2){
@@ -103,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
+//Button Two click action
         public void button2Click(View v){
             final TextView resultDisplay = this.findViewById(R.id.resultView);
             if(num2 > num1 || num2 == num1){
