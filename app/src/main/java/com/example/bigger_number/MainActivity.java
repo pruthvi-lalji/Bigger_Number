@@ -17,6 +17,9 @@ public class MainActivity extends AppCompatActivity {
 
     int num1;
     int num2;
+    int userScore = 0;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void randomGen(View v){
         //2 random nnumber generated
+        TextView scoreDisplay = this.findViewById(R.id.userScore);
+        scoreDisplay.setText("Your Score: " + userScore);
         Random r = new Random();
          num1 = r.nextInt(100);
          num2 = r.nextInt(100);
@@ -84,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         if(num1 > num2 || num1 == num2){
             //right pick
             resultDisplay.setText("Right Pick :)");
+            userScore++;
             randomGen(v);
         }
         else {
@@ -99,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
             if(num2 > num1 || num2 == num1){
                 //right pick
                 resultDisplay.setText("Right Pick :)");
+                userScore++;
                 randomGen(v);
             }
             else {
