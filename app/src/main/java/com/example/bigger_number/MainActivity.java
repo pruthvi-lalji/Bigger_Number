@@ -8,6 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,4 +52,26 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    //main
+    public void start(View v){
+        Button buttonStart = this.findViewById(R.id.startButton);
+        buttonStart.setVisibility(View.GONE);
+        randomGen(v);
+    }
+
+
+    public void randomGen(View v){
+        Random r = new Random();
+        int num1 = r.nextInt(100);
+        int num2 = r.nextInt(100);
+        Button buttonOne = this.findViewById(R.id.button1);
+        Button buttonTwo = this.findViewById(R.id.button2);
+        String numOne = String.valueOf(num1);
+        String numTwo = String.valueOf(num2);
+        buttonOne.setText(numOne);
+        buttonTwo.setText(numTwo);
+    }
+
+
 }
