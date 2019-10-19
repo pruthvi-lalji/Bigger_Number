@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     int num1;
     int num2;
     int userScore = 0;
+    int lives = 3;
 
 
     @Override
@@ -70,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
     public void randomGen(View v){
         //2 random nnumber generated
         TextView scoreDisplay = this.findViewById(R.id.userScore);
+        TextView livesDisplay = this.findViewById(R.id.livesDisplay);
+        livesDisplay.setText("Lives Left: " + lives);
         scoreDisplay.setText("Your Score: " + userScore);
         Random r = new Random();
          num1 = r.nextInt(100);
@@ -95,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
         else {
             //wrong pick
             resultDisplay.setText("Wrong Pick :(");
+            lives--;
             randomGen(v);
         }
 
@@ -111,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
             else {
                 //wrong pick
                 resultDisplay.setText("Wrong Pick :(");
+                lives--;
                 randomGen(v);
             }
         }
