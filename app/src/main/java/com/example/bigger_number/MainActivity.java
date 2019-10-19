@@ -9,11 +9,14 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
+    int num1;
+    int num2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,16 +65,50 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void randomGen(View v){
+        //2 random nnumber generated
         Random r = new Random();
-        int num1 = r.nextInt(100);
-        int num2 = r.nextInt(100);
+         num1 = r.nextInt(100);
+         num2 = r.nextInt(100);
+         //Button Object
         Button buttonOne = this.findViewById(R.id.button1);
         Button buttonTwo = this.findViewById(R.id.button2);
         String numOne = String.valueOf(num1);
         String numTwo = String.valueOf(num2);
+        //Set button Text
         buttonOne.setText(numOne);
         buttonTwo.setText(numTwo);
     }
+
+    public void button1Click(View v){
+        final TextView resultDisplay = this.findViewById(R.id.resultView);
+        if(num1 > num2 || num1 == num2){
+            //right pick
+            resultDisplay.setText("Right Pick :)");
+            randomGen(v);
+        }
+        else {
+            //wrong pick
+            resultDisplay.setText("Wrong Pick :(");
+            randomGen(v);
+
+        }
+
+    }
+
+        public void button2Click(View v){
+            final TextView resultDisplay = this.findViewById(R.id.resultView);
+            if(num2 > num1 || num2 == num1){
+                //right pick
+                resultDisplay.setText("Right Pick :)");
+                randomGen(v);
+            }
+            else {
+                //wrong pick
+                resultDisplay.setText("Wrong Pick :(");
+                randomGen(v);
+            }
+
+        }
 
 
 }
