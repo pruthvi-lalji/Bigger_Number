@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     int num2;
     int userScore = 0;
     int lives = 3;
+    Button buttonOne, buttonTwo, buttonStart;
+    TextView resultDisplay, scoreDisplay,livesDisplay ;
 
 
     @Override
@@ -37,6 +39,12 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        buttonOne = this.findViewById(R.id.button1);
+        buttonTwo = this.findViewById(R.id.button2);
+        buttonOne.setVisibility(View.INVISIBLE);
+        buttonTwo.setVisibility(View.INVISIBLE);
+        resultDisplay = this.findViewById(R.id.resultView);
     }
 
     @Override
@@ -63,16 +71,18 @@ public class MainActivity extends AppCompatActivity {
 
     //main
     public void start(View v){
-        Button buttonStart = this.findViewById(R.id.startButton);
+         buttonStart = this.findViewById(R.id.startButton);
         buttonStart.setVisibility(View.GONE);
+        buttonOne.setVisibility(View.VISIBLE);
+        buttonTwo.setVisibility(View.VISIBLE);
         randomGen(v);
     }
 
 
     public void randomGen(View v){
         //2 random nnumber generated
-        TextView scoreDisplay = this.findViewById(R.id.userScore);
-        TextView livesDisplay = this.findViewById(R.id.livesDisplay);
+         scoreDisplay = this.findViewById(R.id.userScore);
+         livesDisplay = this.findViewById(R.id.livesDisplay);
         livesDisplay.setText("Lives Left: " + lives);
         scoreDisplay.setText("Your Score: " + userScore);
         if(lives > 0){
@@ -80,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
             num1 = r.nextInt(100);
             num2 = r.nextInt(100);
             //Button Object
-            Button buttonOne = this.findViewById(R.id.button1);
-            Button buttonTwo = this.findViewById(R.id.button2);
+           /* Button buttonOne = this.findViewById(R.id.button1);
+            Button buttonTwo = this.findViewById(R.id.button2);*/
             String numOne = String.valueOf(num1);
             String numTwo = String.valueOf(num2);
             //Set button Text
@@ -90,16 +100,22 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             //Displays toast message and resets users score and lives and starts the game again
+            resultDisplay.setText("");
+            scoreDisplay.setText("");
+            livesDisplay.setText("");
             Toast toast = Toast.makeText(getApplicationContext(), "Game Over", Toast.LENGTH_SHORT);
             toast.show();
             userScore = 0;
             lives = 3;
-            randomGen(v);
+            buttonOne.setVisibility(View.INVISIBLE);
+            buttonTwo.setVisibility(View.INVISIBLE);
+
+            restartGame(v);
+            //randomGen(v);
         }
     }
 //Button One click action
     public void button1Click(View v){
-        final TextView resultDisplay = this.findViewById(R.id.resultView);
         if(num1 > num2 || num1 == num2){
             //right pick
             resultDisplay.setText("Right Pick :)");
@@ -116,7 +132,6 @@ public class MainActivity extends AppCompatActivity {
     }
 //Button Two click action
         public void button2Click(View v){
-            final TextView resultDisplay = this.findViewById(R.id.resultView);
             if(num2 > num1 || num2 == num1){
                 //right pick
                 resultDisplay.setText("Right Pick :)");
@@ -129,6 +144,10 @@ public class MainActivity extends AppCompatActivity {
                 lives--;
                 randomGen(v);
             }
+        }
+
+        public void restartGame(View v){
+                buttonStart.setVisibility(View.VISIBLE);
         }
 
 
